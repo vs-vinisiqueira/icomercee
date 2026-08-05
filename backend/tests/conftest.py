@@ -117,3 +117,28 @@ def product_factory(db):
         return p
 
     return _criar
+
+
+@pytest.fixture
+def order_factory(db):
+    def _criar(
+        tenant_id: int,
+        product_id: int | None = None,
+        quantidade: int = 1,
+        shipment_id_externo: str | None = "shipment-1",
+        pedido_id_externo: str = "pedido-1",
+    ):
+        o = order.Order(
+            tenant_id=tenant_id,
+            canal="mercado_livre",
+            pedido_id_externo=pedido_id_externo,
+            product_id=product_id,
+            quantidade=quantidade,
+            shipment_id_externo=shipment_id_externo,
+        )
+        db.add(o)
+        db.commit()
+        db.refresh(o)
+        return o
+
+    return _criar
