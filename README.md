@@ -25,6 +25,16 @@ Suba um PostgreSQL local (ou use o `docker-compose.yml` só para o serviço `db`
 docker compose up -d db
 ```
 
+Sem Docker disponível? `backend/scripts/dev_pg_server.py` sobe um Postgres portátil (via
+[`pgserver`](https://pypi.org/project/pgserver/), sem instalação nem admin) só para desenvolvimento:
+
+```bash
+cd backend
+pip install -r requirements-dev.txt
+python scripts/dev_pg_server.py
+# imprime a DATABASE_URL de conexão e mantém o processo rodando; Ctrl+C encerra e limpa os dados
+```
+
 ### 2. Backend
 
 ```bash

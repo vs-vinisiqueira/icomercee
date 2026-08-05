@@ -1,0 +1,6 @@
+# Dependências extras só para desenvolvimento local (não vão pra produção).
+-r requirements.txt
+
+# Postgres portátil (sem precisar instalar nem Docker) para rodar
+# scripts/dev_pg_server.py e testar a API/migrations contra um Postgres de verdade.
+pgserver
