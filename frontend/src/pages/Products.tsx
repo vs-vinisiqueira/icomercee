@@ -21,7 +21,12 @@ export function Products() {
   const carregarProdutos = () => {
     api
       .get<ProductResponse[]>("/products/", { params: { apenas_estoque_baixo: apenasEstoqueBaixo } })
-      .then((res) => setProdutos(res.data));
+      .then((res) => {
+        setProdutos(res.data);
+        setProdutoSelecionado((atual) =>
+          atual ? res.data.find((p) => p.id === atual.id) ?? atual : atual
+        );
+      });
   };
 
   useEffect(carregarProdutos, [apenasEstoqueBaixo]);
